@@ -1,3 +1,5 @@
+import AlertError from "@/Components/feedback/AlertError";
+import AlertSuccess from "@/Components/feedback/AlertSuccess";
 import { Head, Link, router } from "@inertiajs/react";
 import React, { useState } from "react";
 
@@ -6,15 +8,18 @@ const Login = (props) => {
         username: "",
         password: "",
     });
+    const error = props.errors;
+    const flash = props.flash;
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
         try {
             router.post("/login", {
                 username: form.username,
                 password: form.password,
             });
         } catch (error) {
-            console.log(error);
+            console.log("LoginError=>", error);
         }
     };
 
@@ -22,8 +27,23 @@ const Login = (props) => {
     return (
         <>
             <Head title="Login" />
-            <div className="min-h-screen flex flex-col justify-center items-center">
-                <div className="p-4 flex flex-col justify-center items-center gap-4 border border-slate-200 shadow-md rounded-xl">
+
+            <div className="min-h-screen flex flex-col justify-center items-center gap-4">
+                {error.login && (
+                    <div className="max-w-sm">
+                        <AlertError message={error.login} />
+                    </div>
+                )}
+                {flash.message && (
+                    <div className="max-w-sm">
+                        <AlertSuccess message={flash.message} />
+                    </div>
+                )}
+                <form
+                    onSubmit={handleLogin}
+                    className="p-4 flex flex-col justify-center items-center gap-4 border border-slate-200 shadow-md rounded-xl"
+                >
+                    <h1 className="text-2xl font-bold">Login</h1>
                     <input
                         type="text"
                         placeholder="Username"
@@ -39,6 +59,7 @@ const Login = (props) => {
                         onChange={(e) =>
                             setForm({ ...form, password: e.target.value })
                         }
+                        autoComplete="off"
                     />
 
                     <div className="w-full flex items-center justify-between">
@@ -46,13 +67,13 @@ const Login = (props) => {
                             Register
                         </Link>
                         <button
-                            onClick={handleLogin}
+                            type="submit"
                             className="btn bg-transparent border-slate-400"
                         >
-                            <h1 className="text-xl font-bold">Login</h1>
+                            <h1 className="text-xl font-bold">Submit</h1>
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     );

@@ -20,6 +20,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return Inertia::render('Beranda');
     })->name('beranda');
+    Route::get('/suhu-dan-kelembaban', function () {
+        return Inertia::render('Snk');
+    })->name('snk');
+    Route::get('/pengontrolan', function () {
+        return Inertia::render('Pengontrolan');
+    })->name('pengontrolan');
 });
 
 Route::get('/login', function () {
@@ -38,4 +44,9 @@ Route::get('/register', function () {
 Route::post(
     '/register',
     [AuthController::class, 'register']
+);
+
+Route::post(
+    '/logout',
+    [AuthController::class, 'logout']
 );

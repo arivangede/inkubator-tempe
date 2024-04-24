@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import React, { useState } from "react";
 
 import hamburger from "@/assets/icon/hamburger.svg";
@@ -13,8 +13,12 @@ const Navbar = ({ user }) => {
     const handlePopupProfil = () => {
         setPopProfil(!popProfil);
     };
+
+    const handleLogout = () => {
+        router.post("/logout");
+    };
     return (
-        <div className="navbar bg-base-100 relative">
+        <div className="navbar bg-base-100 relative z-50">
             <div className="flex-1">
                 <Link className="text-xl font-bold px-4" href="/">
                     Inkubator Tempe
@@ -29,15 +33,18 @@ const Navbar = ({ user }) => {
             <div
                 className={`${
                     popMenu == false ? "scale-0" : "scale-100"
-                } transition origin-top-right p-4 rounded-lg shadow-md flex justify-center items-center absolute top-full flex-col right-0 gap-4 sm:gap-8 sm:static sm:flex-row sm:scale-100 sm:shadow-none`}
+                } bg-white border border-slate-400 transition origin-top-right p-4 rounded-lg shadow-md flex justify-center items-center absolute top-full flex-col right-0 gap-4 sm:gap-8 sm:static sm:flex-row sm:scale-100 sm:shadow-none`}
             >
-                <Link href="#" className="hover:text-blue-800">
+                <Link href="/" className="hover:text-blue-800">
                     Beranda
                 </Link>
-                <Link href="#" className="hover:text-blue-800">
+                <Link
+                    href="/suhu-dan-kelembaban"
+                    className="hover:text-blue-800"
+                >
                     Suhu & Kelembaban
                 </Link>
-                <Link href="#" className="hover:text-blue-800">
+                <Link href="/pengontrolan" className="hover:text-blue-800">
                     Pengontrolan
                 </Link>
 
@@ -45,9 +52,13 @@ const Navbar = ({ user }) => {
                     <div
                         className={`flex flex-col justify-center items-center`}
                     >
-                        <h3>nama</h3>
-                        <h4>username</h4>
-                        <button className="btn mt-4">Logout</button>
+                        <div className="leading-4">
+                            <h3>{user.full_name}</h3>
+                            <h4 className="font-bold">{user.username}</h4>
+                        </div>
+                        <button onClick={handleLogout} className="btn mt-4">
+                            Logout
+                        </button>
                     </div>
                 </div>
 
@@ -58,11 +69,15 @@ const Navbar = ({ user }) => {
                     <div
                         className={`${
                             popProfil == false ? "scale-0" : "scale-100 "
-                        } flex transition origin-top-right flex-col justify-center items-center sm:absolute sm:top-full sm:right-0 sm:shadow-md sm:rounded-md sm:px-8 sm:py-4`}
+                        } bg-white border border-slate-400 flex transition origin-top-right flex-col justify-center items-center sm:absolute sm:top-full sm:right-0 sm:shadow-md sm:rounded-md sm:px-8 sm:py-4`}
                     >
-                        <h3>nama</h3>
-                        <h4>username</h4>
-                        <button className="btn mt-4">Logout</button>
+                        <div className="leading-4">
+                            <h3>{user.full_name}</h3>
+                            <h4 className="font-bold">{user.username}</h4>
+                        </div>
+                        <button onClick={handleLogout} className="btn mt-4">
+                            Logout
+                        </button>
                     </div>
                 </div>
             </div>

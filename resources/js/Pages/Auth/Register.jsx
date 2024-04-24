@@ -1,3 +1,4 @@
+import AlertError from "@/Components/feedback/AlertError";
 import { Head, Link, router } from "@inertiajs/react";
 import React, { useState } from "react";
 
@@ -9,16 +10,20 @@ const Register = (props) => {
     });
 
     const [error, setError] = useState({});
+    const errorServer = props.errors;
 
     const handleRegister = (e) => {
         e.preventDefault();
-        const data = {
-            username: form.username,
-            full_name: form.full_name,
-            password: form.password,
-        };
-        router.post("/register", data);
-        console.log(data);
+        try {
+            const data = {
+                username: form.username,
+                full_name: form.full_name,
+                password: form.password,
+            };
+            router.post("/register", data);
+        } catch (error) {
+            console.log("RegisterError=>", error);
+        }
     };
 
     console.log(props);
@@ -26,7 +31,22 @@ const Register = (props) => {
     return (
         <>
             <Head title="Register" />
-            <div className="min-h-screen flex flex-col justify-center items-center">
+            <div className="min-h-screen flex flex-col justify-center items-center gap-4">
+                {errorServer.username && (
+                    <div className="max-w-sm">
+                        <AlertError message={errorServer.username} />
+                    </div>
+                )}
+                {errorServer.full_name && (
+                    <div className="max-w-sm">
+                        <AlertError message={errorServer.full_name} />
+                    </div>
+                )}
+                {errorServer.password && (
+                    <div className="max-w-sm">
+                        <AlertError message={errorServer.password} />
+                    </div>
+                )}
                 <form
                     onSubmit={handleRegister}
                     className="p-4 flex flex-col justify-center items-center gap-4 border border-slate-200 shadow-md rounded-xl"

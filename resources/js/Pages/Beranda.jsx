@@ -1,4 +1,5 @@
 import Navbar from "@/Components/Navbar";
+import Table from "@/Components/Table";
 import { Head } from "@inertiajs/react";
 import React from "react";
 
@@ -7,7 +8,8 @@ const Beranda = (props) => {
     return (
         <>
             <Head title="Beranda" />
-            <Navbar user={props.auth} />
+            <Navbar user={props.auth.user} />
+            <Table />
         </>
     );
 };

@@ -32,7 +32,7 @@ class AuthController extends Controller
         ]);
 
         // Redirect ke halaman home atau ke halaman selanjutnya setelah registrasi
-        return to_route('login')->with('success', 'Registration successful. Please login.');
+        return to_route('login')->with('message', 'Registration successful. Please login.');
     }
 
     public function login(Request $request)
