@@ -15,7 +15,7 @@ const Pengontrolan = (props) => {
         <>
             <Head title="Pengontrolan" />
             <Navbar user={props.auth.user} />
-            <div className="w-full flex justify-center items-center gap-8">
+            <div className="w-full min-h-screen flex justify-center items-center gap-8">
                 {loading ? (
                     <span className="loading loading-ring loading-lg"></span>
                 ) : (

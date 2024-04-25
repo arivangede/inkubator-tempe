@@ -33,7 +33,7 @@ const Navbar = ({ user }) => {
             <div
                 className={`${
                     popMenu == false ? "scale-0" : "scale-100"
-                } bg-white border border-slate-400 transition origin-top-right p-4 rounded-lg shadow-md flex justify-center items-center absolute top-full flex-col right-0 gap-4 sm:gap-8 sm:static sm:flex-row sm:scale-100 sm:shadow-none`}
+                } bg-white border sm:border-none border-slate-400 transition origin-top-right p-4 rounded-lg shadow-md flex justify-center items-center absolute top-full flex-col right-0 gap-4 sm:gap-8 sm:static sm:flex-row sm:scale-100 sm:shadow-none`}
             >
                 <Link href="/" className="hover:text-blue-800">
                     Beranda

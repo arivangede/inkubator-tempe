@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\IotController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Pengontrolan');
     })->name('pengontrolan');
 });
+
+Route::post('/post-data', [IotController::class, 'receiveData']);
+Route::get('/post-data', [IotController::class, 'receiveData']);
 
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');

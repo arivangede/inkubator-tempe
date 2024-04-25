@@ -9,7 +9,9 @@ const Beranda = (props) => {
         <>
             <Head title="Beranda" />
             <Navbar user={props.auth.user} />
-            <Table />
+            <div className="w-full flex justify-center items-center gap-8">
+                <Table />
+            </div>
         </>
     );
 };
