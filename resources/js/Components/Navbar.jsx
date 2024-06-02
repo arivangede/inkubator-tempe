@@ -1,11 +1,18 @@
-import { Link, router } from "@inertiajs/react";
-import React, { useState } from "react";
+import { Link, router, usePage } from "@inertiajs/react";
+import React, { useEffect, useState } from "react";
 
 import hamburger from "@/assets/icon/hamburger.svg";
 
 const Navbar = ({ user }) => {
     const [popMenu, setPopMenu] = useState(false);
     const [popProfil, setPopProfil] = useState(false);
+    const [currentRoute, setCurrentRoute] = useState("");
+    const { url } = usePage();
+
+    useEffect(() => {
+        // Mengatur state currentRoute dengan path URL saat ini
+        setCurrentRoute(url);
+    }, [url]);
 
     const handlePopupMenu = () => {
         setPopMenu(!popMenu);
@@ -17,6 +24,7 @@ const Navbar = ({ user }) => {
     const handleLogout = () => {
         router.post("/logout");
     };
+
     return (
         <div className="navbar bg-base-100 relative z-50">
             <div className="flex-1">
@@ -35,16 +43,30 @@ const Navbar = ({ user }) => {
                     popMenu == false ? "scale-0" : "scale-100"
                 } bg-white border sm:border-none border-slate-400 transition origin-top-right p-4 rounded-lg shadow-md flex justify-center items-center absolute top-full flex-col right-0 gap-4 sm:gap-8 sm:static sm:flex-row sm:scale-100 sm:shadow-none`}
             >
-                <Link href="/" className="hover:text-blue-800">
+                <Link
+                    href="/"
+                    className={`${
+                        currentRoute === "/" ? "text-blue-800" : ""
+                    } hover:text-blue-800`}
+                >
                     Beranda
                 </Link>
                 <Link
                     href="/suhu-dan-kelembaban"
-                    className="hover:text-blue-800"
+                    className={`${
+                        currentRoute === "/suhu-dan-kelembaban"
+                            ? "text-blue-800"
+                            : ""
+                    } hover:text-blue-800`}
                 >
                     Suhu & Kelembaban
                 </Link>
-                <Link href="/pengontrolan" className="hover:text-blue-800">
+                <Link
+                    href="/pengontrolan"
+                    className={`${
+                        currentRoute === "/pengontrolan" ? "text-blue-800" : ""
+                    } hover:text-blue-800`}
+                >
                     Pengontrolan
                 </Link>
 

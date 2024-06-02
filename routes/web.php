@@ -15,7 +15,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// rute halaman
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return Inertia::render('Beranda');
@@ -28,13 +28,21 @@ Route::middleware('auth')->group(function () {
     })->name('pengontrolan');
 });
 
+// rute iot
 Route::post('/post-data', [IotController::class, 'receiveData']);
-Route::get('/post-data', [IotController::class, 'receiveData']);
+Route::get('/data-sensor', [IotController::class, 'displayData']);
+Route::get('/data-histori', [IotController::class, 'getAllData']);
 
+Route::post('/control', [IotController::class, 'writeControl']);
+Route::get('/control', [IotController::class, 'getControl']);
+
+Route::get('/mode', [IotController::class, 'getMode']);
+Route::post('/mode', [IotController::class, 'writeMode']);
+
+// rute autentikasi user
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');
 })->name('login');
-
 Route::post(
     '/login',
     [AuthController::class, 'login']
@@ -43,7 +51,6 @@ Route::post(
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 })->name('register');
-
 Route::post(
     '/register',
     [AuthController::class, 'register']
