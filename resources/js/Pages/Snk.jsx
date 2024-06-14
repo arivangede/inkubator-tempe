@@ -91,16 +91,18 @@ const Snk = (props) => {
                     </svg>
                     <span>Tidak ada koneksi internet!</span>
                 </div>
-                <img
-                    src={suhuImg}
-                    alt="suhuImg"
-                    className="absolute -left-12 w-1/2 opacity-50 z-0 object-contain"
-                />
-                <img
-                    src={kelembabanImg}
-                    alt="kelembabanImg"
-                    className="absolute -right-12 w-1/2 opacity-50 z-0 object-contain"
-                />
+                <div className="absolute flex justify-center items-center gap-20">
+                    <img
+                        src={suhuImg}
+                        alt="suhuImg"
+                        className="w-1/2 max-w-96 opacity-50 z-0 object-contain"
+                    />
+                    <img
+                        src={kelembabanImg}
+                        alt="kelembabanImg"
+                        className="w-1/2 max-w-96 opacity-50 z-0 object-contain"
+                    />
+                </div>
                 <div className="flex justify-center items-center gap-8 z-10 ">
                     <div className="flex flex-col justify-center items-center w-20">
                         <div className="block h-80 w-10 border-4 border-slate-300 rounded-full overflow-hidden relative">
